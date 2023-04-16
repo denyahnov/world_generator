@@ -15,3 +15,6 @@ Edit `camera.py` to your desired config values:
 - `UNLOAD_DISTANCE` *int* : Distance from camera to unload chunks
 - `CHUNK_SIZE` *Vector3*  : Size of each chunk in x,y,z format
 - `SHOW_GRID` *bool*      : Show outlines of each block
+
+Then run `main.py` and use the arrow keys to move the camera around.
+You should see the chunks around you being randomly genereated, then unloaded once you go far enough away.
