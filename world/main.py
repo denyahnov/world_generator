@@ -55,7 +55,9 @@ while window.RUNNING:
 	player.x = origin.x - player.w / 2
 	player.y = origin.y - player.h / 2
 
-	window.draw(rendered,gm.BACKGROUND)
+	optimised = [block for block in rendered if (block.x + block.w > 0 and block.x < window.WIDTH) and (block.y + block.h > 0 and block.y < window.HEIGHT)]
+
+	window.draw(optimised,gm.BACKGROUND)
 
 	window.draw([player],gm.FOREGROUND)
 
@@ -64,10 +66,12 @@ while window.RUNNING:
 		Text(f"Render Distance: {camera.RENDER_DISTANCE}", [10,40], font_size = 25),
 		Text(f"Unload Distance: {camera.UNLOAD_DISTANCE}", [10,70], font_size = 25),
 		Text(f"Chunks Loaded: {len(chunks)}", [10,100], font_size = 25),
-		Text(f"Blocks Loaded: {len(rendered)}", [10,130], font_size = 25),
-		Text("Camera:   {}  {}  {}".format(*camera.POSITION.format()), [10,160], font_size = 25),
-		Text("Chunk Position:   {}  {}".format(*chunk_position.format()), [10,190], font_size = 25),
-		Text("Block Selected:   {}  {}".format(*block_selected.format()), [10,220], font_size = 25),
+		Text(f"Blocks Cached: {len(chunks) * camera.CHUNK_SIZE.x * camera.CHUNK_SIZE.z}", [10,130], font_size = 25),
+		Text(f"Blocks Loaded: {len(rendered)}", [10,160], font_size = 25),
+		Text(f"Blocks Drawn: {len(optimised)}", [10,190], font_size = 25),
+		Text("Camera:   {}  {}  {}".format(*camera.POSITION.format()), [10,220], font_size = 25),
+		Text("Chunk Position:   {}  {}".format(*chunk_position.format()), [10,250], font_size = 25),
+		Text("Block Selected:   {}  {}".format(*block_selected.format()), [10,280], font_size = 25),
 	],gm.GUI)
 
 	window.update()
