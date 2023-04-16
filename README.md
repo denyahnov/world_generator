@@ -1,5 +1,11 @@
 # 3D Procedural World Generation (2D View)
 
+## Info:
+
+While the view is a 2D birds eye view, all of the logic incorporates 3D.
+Some tweaking of the code will allow you to break blocks, letting you to see the layers underneath.
+The current code draws the top layer of the chunks.
+
 ## Requirements:
 
 Use [pip](https://pypi.org/project/pip/) to install the following modules:
