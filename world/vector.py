@@ -78,6 +78,12 @@ class Vector2():
 		self.x *= val
 		self.y *= val
 
+	def rounded(self,rounding):
+		return Vector2(round(self.x,rounding),round(self.y,rounding))
+
+	def as_int(self):
+		return Vector2(int(self.x),int(self.y))
+
 	def from_int(value):
 		return Vector2(value,value)
 
@@ -176,6 +182,12 @@ class Vector3():
 
 	def is_zero(self):
 		return self == 0
+
+	def rounded(self,rounding):
+		return Vector3(round(self.x,rounding),round(self.y,rounding),round(self.z,rounding))
+
+	def as_int(self):
+		return Vector3(int(self.x),int(self.y),int(self.z))
 
 	def from_int(value):
 		return Vector3(value,value,value)

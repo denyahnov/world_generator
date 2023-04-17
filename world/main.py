@@ -31,7 +31,7 @@ while window.RUNNING:
 
 	rendered = []
 
-	zoom = blocks.Block.scale(None,camera.POSITION.y)
+	zoom = blocks.Block.scale(None,round(camera.POSITION.y,1))
 
 	block_selected.x = (gm.Mouse.get_pos()[0] - window.H_WIDTH  - camera.POSITION.x) // zoom
 	block_selected.y = (window.H_HEIGHT - gm.Mouse.get_pos()[1] + camera.POSITION.z) // zoom
@@ -47,7 +47,7 @@ while window.RUNNING:
 	for chunk in chunks.values():
 		if chunk_position.x + camera.UNLOAD_DISTANCE > chunk.position.x > chunk_position.x - camera.UNLOAD_DISTANCE:
 			if chunk_position.y + camera.UNLOAD_DISTANCE > chunk.position.y > chunk_position.y - camera.UNLOAD_DISTANCE:
-				rendered += [block.render(camera.POSITION + origin + chunk.position * camera.CHUNK_SIZE.x * zoom) for block in chunk.layer(0)]	
+				rendered += [block.render(camera.POSITION.rounded(1) + origin + chunk.position * camera.CHUNK_SIZE.x * zoom) for block in chunk.layer(0)]	
 
 	player.w = zoom
 	player.h = zoom

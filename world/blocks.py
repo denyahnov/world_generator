@@ -1,14 +1,21 @@
 import camera
 from vector import *
 
-from GameMaker.Assets import Rectangle
+import pygame as pg
+from GameMaker.Assets import Rectangle, Image
 
 import random
+import copy
+
+class Assets:
+	grass = pg.image.load("assets\\grass.png")
+	stone = pg.image.load("assets\\stone.png")
+	water = pg.image.load("assets\\water.png")
 
 def Random(*args,**kwargs):
 	rng = random.randint(0,10)
 
-	if rng == 0: return Water(*args,**kwargs)
+	# if rng == 0: return Water(*args,**kwargs)
 	if rng < 4: return Stone(*args,**kwargs)
 
 	return Grass(*args,**kwargs)
@@ -31,17 +38,47 @@ class Block(Rectangle):
 
 		return self
 
-class Grass(Block):
-	def __init__(self,*args,**kwargs):
-		super().__init__(0,150,0,*args,**kwargs)
+class AssetBlock():
+	def __init__(self,asset,position=(0,0,0)):
+		self.position = Vector3(*position)
 
-class Stone(Block):
-	def __init__(self,*args,**kwargs):
-		super().__init__(150,150,150,*args,**kwargs)
+		self.asset = asset
 
-class Water(Block):
+		self.x,self.y,self.w,self.h = [0,0,0,0]
+
+	def scale(self,zoom):
+		return zoom * 10
+
+	def render(self,camera):
+		self.w = self.scale(camera.y)
+		self.h = self.w
+
+		self.x = (self.position.x * self.w) + camera.x 
+		self.y = (self.position.z * self.h) + camera.z
+
+		self.image = pg.transform.scale(copy.copy(self.asset), (self.w, self.h))
+
+		self.rect = self.image.get_rect()
+
+		self.rect.x = self.x
+		self.rect.y = self.y
+
+		return self
+
+	def draw(self,window):
+		window.blit(self.image,self.rect)
+
+class Grass(AssetBlock):
 	def __init__(self,*args,**kwargs):
-		super().__init__(0,0,150,*args,**kwargs)
+		super().__init__(Assets.grass,*args,**kwargs)
+
+class Stone(AssetBlock):
+	def __init__(self,*args,**kwargs):
+		super().__init__(Assets.stone,*args,**kwargs)
+
+class Water(AssetBlock):
+	def __init__(self,*args,**kwargs):
+		super().__init__(Assets.water,*args,**kwargs)
 
 class Chunk():
 	def __init__(self, default = Block, position = Vector2.from_int(0) ):
