@@ -1,8 +1,8 @@
 from vector import *
 
 POSITION = Vector3(0,1,0)
-RENDER_DISTANCE = 5
+RENDER_DISTANCE = 4
 UNLOAD_DISTANCE = RENDER_DISTANCE + 2
 
-CHUNK_SIZE = Vector3(8,1,8)
+CHUNK_SIZE = Vector3(4,1,4)
 SHOW_GRID = False
