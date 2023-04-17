@@ -24,3 +24,6 @@ Edit `camera.py` to your desired config values:
 
 Then run `main.py` and use the arrow keys to move the camera around.
 You should see the chunks around you being randomly genereated, then unloaded once you go far enough away.
+
+![Preview](https://user-images.githubusercontent.com/60083582/232429063-61203138-09ec-405c-9c43-ca257e86f094.png)
+![Preview2](https://user-images.githubusercontent.com/60083582/232429324-36722c9d-e182-4e7f-8f4a-102a259a0183.png)
